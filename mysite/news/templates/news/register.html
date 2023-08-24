@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Registation  :: {{ block.super }}
+{% endblock %}
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<h1>Registation</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
