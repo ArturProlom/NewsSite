@@ -140,6 +140,7 @@ INTERNAL_IPS = ["127.0.0.1"]
 
 EMAIL_HOST = 'smtp.ukr.net'
 EMAIL_PORT = 465
+<<<<<<< HEAD
 EMAIL_HOST_USER = 'ukr.net'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
@@ -219,3 +220,9 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
     }
 }
+=======
+EMAIL_HOST_USER = 'r.net'
+
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+EMAIL_USER_SSL = True
