@@ -46,26 +46,23 @@ def user_logout(request):
     return redirect('user_login')
 
 
-def test(request):
+def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            mail = send_mail(
-                subject=form.cleaned_data['subject'],
-                message=form.cleaned_data['content'],
-                from_email='az0509623882@ukr.net',
-                recipient_list=['az0972507926@gmail.com'],
-                fail_silently=False)
+            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'], 'bemben1@ukr.net',
+                             ['az0972507926@gmail.com'], fail_silently=True)
+            # на стадии деплоя fail_silently = True
             if mail:
                 messages.success(request=request, message='Письмо  отправлено')
-                return redirect('test')
+                return redirect('contact')
             else:
                 messages.error(request=request, message='Ошибка отправки')
         else:
-            messages.error(request=request, message='Форма заполнена неверно!')
+            messages.error(request=request, message='Ошибка валидации')
     else:
         form = ContactForm()
-    return render(request=request, template_name='news/test.html', context={'form': form})
+    return render(request=request, template_name='news/contact.html', context={'form': form})
 
 
 class HomeNews(MyMixin, ListView):

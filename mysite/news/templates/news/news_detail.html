@@ -19,7 +19,8 @@
                 <img  src="https://picsum.photos/seed/picsum/350/235" class="float-left mr-3">
                 {% endif %}
                     <h5 class="card-title">{{ news_item.title }}</h5>
-                    <p class="card-text">{{ news_item.content|linebreaks }}</p>
+                    <p class="card-text">{{ news_item.content|safe|linebreaks }}</p>
+
         </div>
 
         </div>
