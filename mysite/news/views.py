@@ -20,10 +20,10 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request=request, user=user)
-            messages.success(request, 'Регистрация прошла успешно')
+            messages.success(request, 'Registration was successful')
             return redirect('home')
         else:
-            messages.error(request, 'Ошибка регистрации')
+            messages.error(request, 'Registration error')
     else:
         form = UserRegisterForm()
     return render(request=request, template_name='news/register.html', context={'form': form})
@@ -54,12 +54,12 @@ def contact(request):
                              ['az0972507926@gmail.com'], fail_silently=True)
             # на стадии деплоя fail_silently = True
             if mail:
-                messages.success(request=request, message='Письмо  отправлено')
+                messages.success(request=request, message='Email send')
                 return redirect('contact')
             else:
-                messages.error(request=request, message='Ошибка отправки')
+                messages.error(request=request, message='Sending error')
         else:
-            messages.error(request=request, message='Ошибка валидации')
+            messages.error(request=request, message='Validation error')
     else:
         form = ContactForm()
     return render(request=request, template_name='news/contact.html', context={'form': form})
@@ -76,7 +76,7 @@ class HomeNews(MyMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):  # переопределяем метод
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Главная страница'
+        context['title'] = 'Main page'
         # context['title'] = self.get_upper(context['title'])
         # context['mixin_prop'] = self.get_prop()
         return context
@@ -106,15 +106,6 @@ class ViewNews(DetailView):
     model = News
     context_object_name = 'news_item'
 
-    # по умолчанию нужно передавать в url pk или slug , но у нас параметр 'news_id' был заменен в url  на pk
-    #  в методе  def get_absolute_url(self):
-    #         return reverse(viewname='view_news', kwargs={'news_id': self.pk})
-    #         мы заменили так же kwargs={'pk': self.pk}
-    #  для slug  атрибут - 'slug_url_kwarg'
-
-    # pk_url_kwarg = 'news_id'
-    # template_name = 'news/news_detail.html'
-
 
 class CreateNews(LoginRequiredMixin, CreateView):
     form_class = NewsForm
@@ -122,54 +113,3 @@ class CreateNews(LoginRequiredMixin, CreateView):
     # login_url = '/admin/' #редиректит на указанный адрес
 
     raise_exception = True  # ошибку для неавторизованного
-
-    # reverse  по сути аналог  reverse_lazy с тем отличием что reverse_lazy мы можем использовать в данном месте ,
-    #  а reverse   - нет , это аналог в коде  тегу шаблонному url
-    # success_url = reverse_lazy('home')
-
-# def index(request):
-#     news = News.objects.all()
-#     return render(request=request, template_name='news/index.html',
-#                   context={
-#                       'news': news,
-#                       'title': 'Список Новостей '})
-
-
-# def get_category(request, category_id):
-#     news = News.objects.filter(category_id=category_id)
-#     category = Category.objects.get(pk=category_id)
-#     return render(request=request, template_name='news/category.html', context={
-#         'news': news,
-#         'category': category})
-
-
-# def view_news(request, news_id):
-#     # news_item = News.objects.get(pk=news_id)
-#     news_item = get_object_or_404(News, pk=news_id)
-#     return render(request=request, template_name='news/view_news.html', context={'news_item': news_item})
-
-
-# def add_news(request):  # для формы связанной с моделью
-#     if request.method == 'POST':
-#         form = NewsForm(request.POST)
-#         if form.is_valid():
-#             # print(form.cleaned_data)
-#             # news = News.objects.create(**form.cleaned_data)
-#             news = form.save()
-#             return redirect(news)
-#     else:
-#         form = NewsForm()
-#
-#     return render(request=request, template_name='news/add_news.html', context={'form': form})
-
-# def add_news(request):   #  Для формы не связаной с моделью
-#     if request.method == 'POST':
-#         form = NewsForm(request.POST)
-#         if form.is_valid():
-#             # print(form.cleaned_data)
-#             news = News.objects.create(**form.cleaned_data)
-#             return redirect(news)
-#     else:
-#         form = NewsForm()
-#
-#     return render(request=request, template_name='news/add_news.html', context={'form': form})

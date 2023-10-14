@@ -8,16 +8,16 @@ from captcha.fields import CaptchaField, CaptchaTextInput
 
 
 class ContactForm(forms.Form):
-    subject = forms.CharField(label='Тема письма', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    content = forms.CharField(label='Текст', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    subject = forms.CharField(label='Email subject', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    content = forms.CharField(label='Text', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     captcha = CaptchaField()
 
 
 class UserRegisterForm(UserCreationForm):
-    username = forms.CharField(label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'form-control'}),
-                               help_text='Максимум 150 символов')
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    password2 = forms.CharField(label='Подтверждение пароля',
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}),
+                               help_text='Maximum 150 characters')
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Password confirmation',
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField()
@@ -28,8 +28,8 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
 
@@ -51,7 +51,7 @@ class NewsForm(forms.ModelForm):
     def clean_title(self):  # кастомный валидатор
         title = self.cleaned_data['title']
         if re.match(r'\d', title):
-            raise ValidationError('Название не должно начинаться с цифры')
+            raise ValidationError('Name should not start with a number')
         return title
 
 # class NewsForm(forms.Form):  #  Форма не связанная с моделями

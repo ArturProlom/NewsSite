@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'captcha',
     'ckeditor_uploader',
     'news.apps.NewsConfig',
-
-
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -224,3 +223,4 @@ EMAIL_HOST_USER = 'r.net'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USER_SSL = True
+MPTT_ADMIN_LEVEL_INDENT = 20

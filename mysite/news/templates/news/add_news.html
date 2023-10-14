@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Добавление новости  :: {{ block.super }}
+Added news  :: {{ block.super }}
 {% endblock %}
 {% block sidebar %}
 {% include 'inc/_sidebar.html' %}
@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<h1>Добавление новости</h1>
+<h1>Add news</h1>
 <form action="{% url 'add_news' %}" method="post">
     {% csrf_token %}   <!-- Без данного тега форма работать не будет !!!  -->
 
